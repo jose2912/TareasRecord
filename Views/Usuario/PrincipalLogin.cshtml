@@ -1,0 +1,189 @@
+﻿@model TareasRecordManagementSystem.Models.Usuario
+@{
+    ViewBag.Title = "PrincipalLogin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    DateTime fecha = DateTime.Now;
+}
+
+<div id="order-detail-content" class="table_block table-responsive">
+    <div class="tab-content">
+        <div class="formularios">
+            @*<div class="modal-dialog cascading-modal" role="document">*@
+            <div id="order-detail-content" class="table_block table-responsive">
+
+                <!--Content-->
+                <div class="modal-c-tabs">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs md-tabs tabs-2 light-blue darken-3" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#panel7" role="tab">
+                                <i class="fa fa-user btn btn-default fas fa-user mr-1"></i>
+                                Inicio de Sesión
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- Tab panels -->
+                    <div class="tab-content">
+                        <!--Panel 7-->
+                        <div class="tab-pane fade in show active" id="panel7" role="tabpanel">
+                            <!--Body-->
+                            <div class="modal-body mb-1" style="margin-right:auto;">
+                                <div class="options text-center text-md-right mt-1">
+                                    <div class="mdl-textfield mdl-js-textfield">
+                                        @Html.TextBoxFor(x => x.Username, new { @maxlength = "20", @class = "mdl-textfield__input", @required = "true" })
+                                        <label class="mdl-textfield__label" for="Username">Ingresa ID de usuario...</label>
+                                    </div>
+                                    <div class="mdl-textfield mdl-js-textfield">
+                                        @Html.PasswordFor(x => x.Clave, new { @class = "mdl-textfield__input", @required = "true", @maxlength = "20" })
+                                        <label class="mdl-textfield__label" for="Clave">Ingresa tu contraseña...</label>
+                                    </div>
+
+                                    <div style="margin-left: 80px;">
+                                        <input type="submit" id="btnEnviarPrincipal" value="Acceder" />
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Footer-->
+                            
+
+                        </div>
+                    </div>
+                    <!--/.Panel 8-->
+                </div>
+
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+
+
+
+<style type="text/css">
+    #txtRClave {
+       width:-80px; 
+    }
+</style>
+
+<script type="text/javascript">
+    (($) => {
+
+        class Toggle {
+
+            constructor(element, options) {
+
+                this.defaults = {
+                    icon: 'fa-eye'
+                };
+
+                this.options = this.assignOptions(options);
+
+                this.$element = element;
+                this.$button = $(`<button class="btn-toggle-pass"><i class="fa ${this.options.icon}"></i></button>`);
+
+                this.init();
+            };
+
+            assignOptions(options) {
+
+                return $.extend({}, this.defaults, options);
+            }
+
+            init() {
+
+                this._appendButton();
+                this.bindEvents();
+            }
+
+            _appendButton() {
+                this.$element.after(this.$button);
+            }
+
+            bindEvents() {
+
+                this.$button.on('click touchstart', this.handleClick.bind(this));
+            }
+
+            handleClick() {
+
+                let type = this.$element.attr('type');
+
+                type = type === 'password' ? 'text' : 'password';
+
+                this.$element.attr('type', type);
+                this.$button.toggleClass('active');
+            }
+        }
+
+        $.fn.togglePassword = function (options) {
+            return this.each(function () {
+                new Toggle($(this), options);
+            });
+        }
+
+    })(jQuery);
+
+    $('#Clave').togglePassword();
+    var urlValidarLogin = '@Url.Action("ValidarLogin", "Usuario")';
+
+    $("#btnEnviarPrincipal").click(function () {
+        var Usuario = Username.value;
+        var Clave = document.getElementById("Clave").value;
+        if (Usuario != "") {
+            if (Clave != "") {
+                $.ajax({
+                    type: 'post',
+                    url: urlValidarLogin,
+                    data: 'Usuario=' + Usuario + '&Clave=' + Clave,
+                    success: function (rpt) {
+                        if (rpt == "" || rpt == undefined) {
+                            alert("Usuario y/o clave incorrectos.");
+                            return false;
+                        }
+                        else {
+                            window.location.href = "../Clientes";
+                        }
+                    }
+                });
+            } else {
+                alert("Ingresa tu contraseña.");
+
+            }
+
+        } else {
+            alert("Ingresa tu id de usuario.");
+        }
+    });
+
+    $("#btnEnviarPrincipal").click(function () {
+        var Usuario = Username.value;
+        var Clave = document.getElementById("Clave").value;
+
+        if (Usuario != "") {
+            if (Clave != "") {
+                $.ajax({
+                    type: 'post',
+                    url: urlValidarLogin,
+                    data: 'Usuario=' + Usuario + '&Clave=' + Clave,
+                    success: function (rpt) {
+                        if (rpt == undefined || rpt == "") {
+                            return false;
+                            //alert("Usuario y/o clave incorrectos.");
+                        }
+                        else {
+                            window.location.href = "../Clientes";
+                        }
+                    }
+                });
+            } else {
+                alert("Ingresa tu contraseña.");
+            }
+        }
+    });
+</script>
+<style type="text/css">
+    .btn-toggle-pass {
+        margin-top: -8px;
+        margin-left: 320px;
+    }
+</style>

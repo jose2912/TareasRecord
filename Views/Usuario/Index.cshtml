@@ -1,0 +1,87 @@
+﻿@model IEnumerable<TareasRecordManagementSystem.Models.Personal>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Lista de Clientes</h2>
+
+<p>
+    <a asp-action="Create">Crear Cliente</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoDoc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumeroDoc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ApPaterno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ApMaterno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaIngreso)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.TipoDoc)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.NumeroDoc)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.ApPaterno)
+            </td>
+             <td>
+                    @Html.DisplayFor(modelItem => item.ApMaterno)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.Nombre1)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.Nombre2)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.FechaIngreso)
+            </td>
+@*            <td>
+
+            <a href="@Url.Action("Edit", new { id = item.Id })" class="mdl-button mdl-js-button mdl-button--icon" 
+            data-upgraded=",MaterialButton"><i class="material-icons">edit</i></a>
+            <a href="@Url.Action("Delete", new { id = item.Id })" class="delete-link mdl-button mdl-js-button mdl-button--icon">
+                 <i class="material-icons">delete</i>
+            </a>
+                    <a href="@Url.Action("Delete", new { id = item.Id })">
+                        <i class="material-icons">remove_red_eye</i>
+                    </a>
+            </td>*@
+        </tr>
+}
+    </tbody>
+</table>
+
+
+
+

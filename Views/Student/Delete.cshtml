@@ -1,0 +1,38 @@
+﻿@model TareasRecordManagementSystem.Models.Personal
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Eliminar</h2>
+
+<h3>¿Seguro que deseas eliminar este registro?</h3>
+<div>
+    <h4>Trabajador</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dt>
+            @Html.DisplayFor(model => model.NumeroDoc)
+        </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.ApPaterno)
+        </dt>
+        <dt>
+            @Html.DisplayFor(model => model.Nombre1)
+        </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre2)
+        </dt>
+        <dt>
+            @Html.DisplayFor(model => model.FechaNac)
+        </dt>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="submit" value="Eliminar" class="btn btn-default" /> |
+        <a asp-action="Index">Regresar</a>
+    </form>
+</div>

@@ -1,0 +1,52 @@
+﻿@model IEnumerable<TareasRecordManagementSystem.Models.Tarea>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h2>Lista de Tareas</h2>
+
+<p>
+    <a asp-action="Create">Registrar Tarea</a>
+</p>
+<table id="tblNotas" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Titulo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Titulo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+
+                    <a href="@Url.Action("Edit", new { id = item.Id })" class="mdl-button mdl-js-button mdl-button--icon"
+                       data-upgraded=",MaterialButton"><i class="material-icons">edit</i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />
+    <script>
+        $(document).ready(function () {
+            $('#tblEstacionamiento').DataTable();
+        });
+    </script>
+}
